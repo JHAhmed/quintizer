@@ -52,7 +52,7 @@ export async function POST({ request }) {
     `;
 
 	const response = await openai.responses.parse({
-		model: 'gpt-5.4-mini',
+		model: 'gpt-5.4',
 		input: [
 			{
 				role: 'system',

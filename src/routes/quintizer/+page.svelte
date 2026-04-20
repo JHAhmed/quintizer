@@ -106,6 +106,8 @@
 			title = data.title;
 			body = data.body;
 			images = data.images;
+		} else {
+			console.error('Failed to fetch AP News:', data);
 		}
 	}
 

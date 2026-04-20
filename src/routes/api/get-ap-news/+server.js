@@ -67,32 +67,29 @@ export async function POST({ request }) {
 
 	console.log('Extracted title and body successfully');
 
-	try {
-		const images = await page.$$eval('.Carousel-slides .CarouselSlide', (slides) => {
-			return slides
-				.map((slide) => {
-					const img = slide.querySelector('img');
-					// Check src, then data-lazy, then srcset as fallbacks
-					const url =
-						img?.src || img?.getAttribute('data-flickity-lazyload') || img?.srcset?.split(' ')[0];
+	const images = await page.$$eval('.Carousel-slides .CarouselSlide', (slides) => {
+		return slides
+			.map((slide) => {
+				const img = slide.querySelector('img');
+				// Check src, then data-lazy, then srcset as fallbacks
+				const url =
+					img?.src || img?.getAttribute('data-flickity-lazyload') || img?.srcset?.split(' ')[0];
 
-					// Target the p tag specifically within the info container
-					const caption =
-						slide.querySelector('.CarouselSlide-infoDescription p')?.innerText ||
-						slide.querySelector('p')?.innerText ||
-						'';
+				// Target the p tag specifically within the info container
+				const caption =
+					slide.querySelector('.CarouselSlide-infoDescription p')?.innerText ||
+					slide.querySelector('p')?.innerText ||
+					'';
 
-					return { url, caption };
-				})
-				.filter((item) => item.url); // Remove nulls
-		});
-		console.log('Extracted images successfully');
-	} catch (err) {
-		console.error('Error extracting images:', err);
-	}
+				return { url, caption };
+			})
+			.filter((item) => item.url); // Remove nulls
+	});
+	
+	console.log('Extracted images successfully');
 
 	return new Response(
-		JSON.stringify({ title: fullTitle, body: bodyText, images: images ? images : [] }),
+		JSON.stringify({ title: fullTitle, body: bodyText, images: images }),
 		{
 			headers: { 'Content-Type': 'application/json' }
 		}
