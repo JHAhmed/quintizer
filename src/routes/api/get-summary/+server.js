@@ -16,7 +16,7 @@ export async function POST({ request }) {
 		const NewsArticle = z.object({
 			titles: z.array(z.string()).length(6),
 			straplines: z.array(z.string()).length(6),
-			bodyParagraphs: z.array(z.string().min(600).max(1000)).length(5),
+			bodyParagraphs: z.array(z.string().min(400).max(800)).length(5),
 			images: z.array(
 				z.object({
 					url: z.string(),
@@ -29,7 +29,7 @@ export async function POST({ request }) {
 
 		const prompt = `
 			Give me 6 new headlines in around 10 words, few editorial style 12 words long straplines, 
-			and rewrite the entire article in 450 words. 5 SEO words/tags (in 1 word each, maybe 2). In the headline, only capitalize the necessary words, not all words. 
+			and rewrite the entire article in 350-400 words. 5 SEO words/tags (in 1 word each, maybe 2). In the headline, only capitalize the necessary words, not all words. 
 			Italize event names, album names, song names, collection names, movie names and other such stuff. Don't include the {CITY} (AP) dateline in the strapline or body.
 			All suitable to put up on a lifestyle magazine news website. Give me separate paragraphs.
 
