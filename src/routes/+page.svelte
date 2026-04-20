@@ -4,6 +4,9 @@
 
 <svelte:head>
 	<title>Quintomation | Automatic AP Summary for Quintype</title>
+	<meta
+		name="description"
+		content="Quintomation is an automatic AP news summarizer built for Quintype. It fetches the latest AP news, summarizes it using an LLM, and generates SEO-friendly headlines and tags." />
 	<meta property="og:image" content="{page.url.origin}/ogimage.png" />
 	<meta property="og:url" content="{page.url.origin}/" />
 </svelte:head>

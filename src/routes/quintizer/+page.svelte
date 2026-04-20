@@ -66,7 +66,6 @@
 			body: JSON.stringify({ title, body, images })
 		});
 		const data = await res.json();
-
 		if (res.ok) {
 			quintTitles = data.titles;
 			quintStraplines = data.straplines;

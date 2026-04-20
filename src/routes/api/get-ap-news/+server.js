@@ -6,7 +6,6 @@ import { dev } from '$app/environment';
 
 const puppeteer = dev ? await import('puppeteer') : await import('puppeteer-core');
 
-
 const VIEWPORT_OPTIONS = {
 	width: 1240, // A4 width at higher DPI
 	height: 1754, // A4 height at higher DPI
@@ -85,13 +84,10 @@ export async function POST({ request }) {
 			})
 			.filter((item) => item.url); // Remove nulls
 	});
-	
+
 	console.log('Extracted images successfully');
 
-	return new Response(
-		JSON.stringify({ title: fullTitle, body: bodyText, images: images }),
-		{
-			headers: { 'Content-Type': 'application/json' }
-		}
-	);
+	return new Response(JSON.stringify({ title: fullTitle, body: bodyText, images: images }), {
+		headers: { 'Content-Type': 'application/json' }
+	});
 }
